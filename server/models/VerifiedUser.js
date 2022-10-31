@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-const userSchema = mongoose.Schema({
+const verifiedUserSchema = mongoose.Schema({
   firstName: {
     type: String,
     maxlength: 50,
@@ -34,6 +34,6 @@ const userSchema = mongoose.Schema({
   },
 });
 
-const User = mongoose.model("User", userSchema);
+const VerifiedUser = mongoose.model("VerifiedUser", verifiedUserSchema);
 
-module.exports = User;
+module.exports = VerifiedUser;

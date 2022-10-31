@@ -7,7 +7,7 @@ const ratingSchema = mongoose.Schema({
   },
   userId: {
     type: mongoose.Schema.Types.ObjectId,
-    req: "User",
+    req: "VerifiedUser",
   },
   rating: {
     type: Number,

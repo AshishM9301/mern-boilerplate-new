@@ -3,7 +3,7 @@ const mongoose = require("mongoose");
 const movieSchema = mongoose.Schema({
   userId: {
     type: mongoose.Schema.Types.ObjectId,
-    req: "User",
+    req: "VerifiedUser",
   },
   movieName: {
     type: String,
