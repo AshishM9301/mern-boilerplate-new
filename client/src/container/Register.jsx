@@ -1,3 +1,4 @@
+import { useGoogleLogin } from "@react-oauth/google";
 import React, { useState } from "react";
 import Button from "../components/Button/Button";
 import Input from "../components/Input/Input";
@@ -18,6 +19,23 @@ const Register = () => {
     }
   };
 
+  const handleGoogleLogin = async (token) => {
+    console.log(token.access_token);
+    await connect(
+      "auth/google",
+      "POST",
+      JSON.stringify({ token: token.access_token }),
+      null
+    );
+  };
+
+  const loginFuncGoogle = useGoogleLogin({
+    onSuccess: (tokenResponse) => {
+      //console.log(tokenResponse);
+      handleGoogleLogin(tokenResponse);
+    },
+  });
+
   return (
     <div className="h-11/12 flex justify-center items-center">
       <div className="w-96 mx-auto">
@@ -28,7 +46,6 @@ const Register = () => {
             setRegisterCred({ ...registerCred, firstName: e.target.value })
           }
         />
-
         <Input
           type="text"
           placeholder="Last Name"
@@ -36,7 +53,6 @@ const Register = () => {
             setRegisterCred({ ...registerCred, lastName: e.target.value })
           }
         />
-
         <Input
           type="email"
           placeholder="Email"
@@ -44,7 +60,6 @@ const Register = () => {
             setRegisterCred({ ...registerCred, email: e.target.value })
           }
         />
-
         <Input
           type="password"
           placeholder="Password"
@@ -52,7 +67,6 @@ const Register = () => {
             setRegisterCred({ ...registerCred, password: e.target.value })
           }
         />
-
         <Input
           type="password"
           placeholder="Confirm Password"
@@ -63,8 +77,12 @@ const Register = () => {
             })
           }
         />
-
-        <Button align="end" title="Register" onClick={registerFunc} />
+        <Button align="end" title="Register" onClick={registerFunc} />{" "}
+        <Button
+          align="end"
+          title="Login with Google"
+          onClick={loginFuncGoogle}
+        />
       </div>
     </div>
   );

@@ -1,11 +1,17 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Navbar from "./components/Navbar/Navbar";
 import { Outlet } from "react-router-dom";
+import { GoogleOAuthProvider } from "@react-oauth/google";
+
 const App = () => {
   return (
     <>
-      <Navbar />
-      <Outlet />
+      <GoogleOAuthProvider
+        clientId={`996058088574-ri1hm1te6ii4p41h1avmvb1f46g57qh9.apps.googleusercontent.com`}
+      >
+        <Navbar />
+        <Outlet />
+      </GoogleOAuthProvider>
     </>
   );
 };
