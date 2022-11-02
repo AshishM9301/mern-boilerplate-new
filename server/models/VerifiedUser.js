@@ -29,6 +29,11 @@ const verifiedUserSchema = mongoose.Schema({
     type: String,
     default: "",
   },
+  user_type: {
+    type: String,
+    default: "RegisteredUser",
+    enums: ["RegisteredUser", "GoogleUser", "FacebookUser"],
+  },
   tokenexp: {
     type: String,
   },

@@ -31,6 +31,7 @@ const verify = async (req, res, next) => {
       email,
       password,
       role,
+      user_type: "RegisteredUser",
     });
 
     await newUser.save();

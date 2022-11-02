@@ -5,6 +5,7 @@ const {
   verify,
   auth,
   googleLogin,
+  facebookLogin,
 } = require("../../../controller");
 const validate = require("../../../middleware/validate");
 
@@ -15,5 +16,6 @@ router.post("/login", login);
 router.get("/verify/:token", verify);
 router.get("/me", validate, auth);
 router.post("/google", googleLogin);
+router.post("/facebook", facebookLogin);
 
 module.exports = router;

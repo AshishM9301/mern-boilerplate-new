@@ -1,22 +1,10 @@
-const axios = require("axios");
 const VerifiedUser = require("../../models/VerifiedUser");
 const generateToken = require("../../services/token");
 
-const googleLogin = async (req, res, next) => {
+const facebookLogin = async (req, res, next) => {
+  const { email, photoURL, firstName, lastName } = req.body;
+
   try {
-    const { token } = req.body;
-
-    const response = await axios.get(
-      "https://www.googleapis.com/oauth2/v3/userinfo",
-      {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      }
-    );
-
-    const { name, given_name, family_name, picture, email } = response.data;
-
     const checkEmail = await VerifiedUser.findOne({ email });
 
     let resp = {};
@@ -33,11 +21,11 @@ const googleLogin = async (req, res, next) => {
       };
     } else {
       const newUser = new VerifiedUser({
-        firstName: given_name,
-        lastName: family_name,
+        firstName,
+        lastName,
         email: email,
-        userPic: picture,
-        user_type: "GoogleUser",
+        userPic: photoURL,
+        user_type: "FacebookUser",
       });
 
       await newUser.save();
@@ -52,7 +40,6 @@ const googleLogin = async (req, res, next) => {
         user_type: newUser.user_type,
       };
     }
-
     const { accessToken, refreshToken } = generateToken(resp);
 
     res.status(200).json({
@@ -67,4 +54,4 @@ const googleLogin = async (req, res, next) => {
   }
 };
 
-module.exports = googleLogin;
+module.exports = facebookLogin;
