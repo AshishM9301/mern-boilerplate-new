@@ -5,7 +5,7 @@ module.exports = {
   HOST: process.env.HOST || "127.0.0.1",
   PORT: process.env.PORT || 5000,
   db: {
-    url: "mongodb+srv://ashish:yZAYuwmMRNgKVxeT@mernbasic.w0ajb.gcp.mongodb.net/mern_boilerplate?retryWrites=true&w=majority",
+    url: "",
   },
   gmail: {
     user: "ghostasbhoot@gmail.com",
